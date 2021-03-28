@@ -8,3 +8,15 @@
 .btn-container {
     text-align: center;
 }
+
+.sat-list {
+    height: 330px;
+    overflow: scroll;
+}
+
+.spin-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 330px;
+}

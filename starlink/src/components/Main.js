@@ -1,25 +1,27 @@
 import React, { Component } from 'react';
 import { Row, Col } from 'antd';
 import SatSetting from "./SatSetting";
-import SatelliteList from "./SatelliteList"
+import SatelliteList from "./SatelliteList";
+import WorldMap from "./WorldMap";
 import { NEARBY_SATELLITE, SAT_API_KEY, STARLINK_CATEGORY } from "../constants";
 import axios from "axios";
 
 class Main extends Component {
     state = {
-        sateInfo: null,
+        satInfo: null,
         isLoadingList: false
     }
     render () {
-        const { sateInfo } = this.state;
+        const { satInfo } = this.state;
         return (
             <Row className='main'>
                 <Col span={8} className="left-side">
                     <SatSetting onShow={this.showNearBySatellite}/>
-                    <SatelliteList satInfo={sateInfo} isLoading={this.state.isLoadingList}/>
+                    <SatelliteList satInfo={satInfo} isLoading={this.state.isLoadingList}
+                                    onShowMap={this.showMap}/>
                 </Col>
                 <Col span={16} className="right-side">
-                    right
+                    <WorldMap />
                 </Col>
             </Row>
         );
@@ -27,9 +29,6 @@ class Main extends Component {
 
     showNearBySatellite = settings => {
         console.log('settings: ', settings);
-        // this.setState({
-        //     settings: settings
-        // });
         // fetch satellite data
         this.fetchSatellite(settings);
     }
