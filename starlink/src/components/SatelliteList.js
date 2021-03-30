@@ -44,7 +44,8 @@ class SatelliteList extends Component {
     }
 
     onShowSatOnMap = () => {
-        this.props.onShowMap(this.selected);
+        const {selected} = this.state;
+        this.props.onShowMap(selected);
     }
 
     render() {

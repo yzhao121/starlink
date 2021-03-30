@@ -8,11 +8,13 @@ import axios from "axios";
 
 class Main extends Component {
     state = {
+        setting: null,
         satInfo: null,
+        satList: null,
         isLoadingList: false
     }
     render () {
-        const { satInfo } = this.state;
+        const { satInfo, setting, satList } = this.state;
         return (
             <Row className='main'>
                 <Col span={8} className="left-side">
@@ -21,15 +23,26 @@ class Main extends Component {
                                     onShowMap={this.showMap}/>
                 </Col>
                 <Col span={16} className="right-side">
-                    <WorldMap />
+                    <WorldMap observeData={setting}
+                              satData={satList}/>
                 </Col>
             </Row>
         );
     }
 
+    showMap = selected => {
+        this.setState(preState => ({
+            ...preState,
+            satList: [...selected]
+        }));
+    }
+
     showNearBySatellite = settings => {
         console.log('settings: ', settings);
         // fetch satellite data
+        this.setState({
+            setting: settings
+        })
         this.fetchSatellite(settings);
     }
 
